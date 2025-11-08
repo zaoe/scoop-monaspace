@@ -4,9 +4,9 @@
   "homepage": "https://github.com/githubnext/monaspace",
   "license": "OFL-1.1",
   "architecture": {
-    "64bit": { "url": "https://raw.githubusercontent.com/zaoe/scoop-monaspace/main/.scoop-stub", "hash": "sha256:758a2af4cda3cfe7ae7e755788b893eb310b8aa8bfc4ea652419163abb60988c" },
-    "arm64": { "url": "https://raw.githubusercontent.com/zaoe/scoop-monaspace/main/.scoop-stub", "hash": "sha256:758a2af4cda3cfe7ae7e755788b893eb310b8aa8bfc4ea652419163abb60988c" },
-    "32bit": { "url": "https://raw.githubusercontent.com/zaoe/scoop-monaspace/main/.scoop-stub", "hash": "sha256:758a2af4cda3cfe7ae7e755788b893eb310b8aa8bfc4ea652419163abb60988c" }
+    "64bit": { "url": "https://raw.githubusercontent.com/zaoe/scoop-monaspace/main/.scoop-stub", "hash": "sha256:886b886dc4c2858c16b51fcab30e9421bd25933ea6428216d4c8a0448f8c8f2e" },
+    "arm64": { "url": "https://raw.githubusercontent.com/zaoe/scoop-monaspace/main/.scoop-stub", "hash": "sha256:886b886dc4c2858c16b51fcab30e9421bd25933ea6428216d4c8a0448f8c8f2e" },
+    "32bit": { "url": "https://raw.githubusercontent.com/zaoe/scoop-monaspace/main/.scoop-stub", "hash": "sha256:886b886dc4c2858c16b51fcab30e9421bd25933ea6428216d4c8a0448f8c8f2e" }
   },
   "installer": {
     "script": [
