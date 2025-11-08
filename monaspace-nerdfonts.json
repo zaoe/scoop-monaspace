@@ -1,0 +1,38 @@
+{
+  "version": "latest",
+  "description": "Monaspace fonts patched with Nerd Fonts glyphs (official nerdfonts bundle). Installs into current user's font directory.",
+  "homepage": "https://github.com/githubnext/monaspace",
+  "license": "OFL-1.1",
+  "architecture": {
+    "64bit": { "url": "https://raw.githubusercontent.com/zaoe/scoop-monaspace/main/.scoop-stub", "hash": "sha256:758a2af4cda3cfe7ae7e755788b893eb310b8aa8bfc4ea652419163abb60988c" },
+    "arm64": { "url": "https://raw.githubusercontent.com/zaoe/scoop-monaspace/main/.scoop-stub", "hash": "sha256:758a2af4cda3cfe7ae7e755788b893eb310b8aa8bfc4ea652419163abb60988c" },
+    "32bit": { "url": "https://raw.githubusercontent.com/zaoe/scoop-monaspace/main/.scoop-stub", "hash": "sha256:758a2af4cda3cfe7ae7e755788b893eb310b8aa8bfc4ea652419163abb60988c" }
+  },
+  "installer": {
+    "script": [
+      "$ErrorActionPreference='Stop'",
+      "$api='https://api.github.com/repos/githubnext/monaspace/releases/latest'",
+      "$rel=Invoke-RestMethod $api",
+      "$asset=$rel.assets | Where-Object { $_.name -match 'nerdfonts' -and $_.name -match '\\.zip$' } | Select-Object -First 1",
+      "if(-not $asset){ throw 'No nerdfonts asset found in latest release.' }",
+      "$zip=Join-Path $dir $asset.name",
+      "Invoke-WebRequest $asset.browser_download_url -OutFile $zip",
+      "Expand-Archive $zip -DestinationPath $dir -Force",
+      "$dst = Join-Path $env:LOCALAPPDATA 'Microsoft\\Windows\\Fonts'",
+      "New-Item -ItemType Directory -Force -Path $dst | Out-Null",
+      "$fonts = Get-ChildItem $dir -Recurse -Include *.otf,*.ttf -ErrorAction SilentlyContinue",
+      "if(-not $fonts){ throw 'No fonts found in nerdfonts bundle.' }",
+      "$list = Join-Path $persist_dir 'installed.txt'",
+      "$fonts | % FullName | Set-Content -Path $list -Encoding UTF8",
+      "foreach($f in $fonts){ Copy-Item $f.FullName $dst -Force }"
+    ]
+  },
+  "uninstaller": {
+    "script": [
+      "$dst = Join-Path $env:LOCALAPPDATA 'Microsoft\\Windows\\Fonts'",
+      "$list = Join-Path $persist_dir 'installed.txt'",
+      "if(Test-Path $list){ Get-Content $list | % { Join-Path $dst (Split-Path $_ -Leaf) } | % { if(Test-Path $_){ Remove-Item $_ -Force -ErrorAction SilentlyContinue } } }"
+    ]
+  },
+  "persist": ["installed.txt"]
+}
